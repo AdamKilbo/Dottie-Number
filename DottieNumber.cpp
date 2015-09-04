@@ -16,35 +16,28 @@ int main()
 	cin >> input;
 
 	// setting up variables for later use
-	double CurrentNumber, PreviousNumber, diff;
+	double CurrentNumber, diff;
 	int iterations = 0;
 	bool DottieFound = false;
 	CurrentNumber = input;
 
-	// if-then statements ensure that PreviousNumber is not the same as CurrentNumber when the program initializes.
-	if (CurrentNumber == 1)
-	{
-		PreviousNumber = 0;
-	}
-	else
-		PreviousNumber = 1;
-
 	// calculate the dottie number
-	while (DottieFound != true)
+	while (CurrentNumber != cos(CurrentNumber))
 	{
-		PreviousNumber = CurrentNumber;
-		CurrentNumber = cos(CurrentNumber);
 		iterations++;
 
-		// debugging statements
-		cout << PreviousNumber << "  " << CurrentNumber << endl;
-		cout << iterations;
+		CurrentNumber = cos(CurrentNumber);
 
-		// calculate difference between currentnumber and previousnumber. if the difference is small enough (due to floating point shenanignas) then the dottie number is found.
-		diff = CurrentNumber - PreviousNumber;
-		if (diff < .00001 && iterations > 100)
-			DottieFound = false;		
+		/*
+		// debugging statements
+		cout << CurrentNumber << endl;
+		cout << iterations << endl;
+		*/
+
+		if (iterations == 100)
+			break;	
 	}
+	// note that comparing floats does not work. Even if i tried to calculate a difference between floats (such as 0.00001 difference) the program would not break. Hence the manual break after 100 iterations (which appears to get the dottie number of anything entered as an input. Crude but effective solution until the problem is figured out).
 
 	cout << "\nThe Dottie Number of " << input << " is " << CurrentNumber << endl;
 }
